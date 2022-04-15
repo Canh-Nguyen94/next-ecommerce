@@ -1,0 +1,20 @@
+$black: black;
+$white: white;
+$red: red;
+
+.button-red{
+    width: 10rem;
+    height: 3rem;
+    border-radius: 1.5rem;
+    outline: none;
+    border: 2px solid $red;
+
+    background:$red;
+    color:inherit;
+    cursor: pointer;
+    &:hover{
+        background:$white;
+        color: $black;
+        transition: all 0.5s ease;
+    }
+}

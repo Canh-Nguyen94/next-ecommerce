@@ -1,0 +1,34 @@
+.home{
+    width:100%;
+    min-height: 80vh;
+    background-image: url("../public/wave-haikei.svg");
+    background-size:cover ;
+    background-position: center;
+    color:$white;
+    text-align: center;
+    h1{
+        margin:0;
+    }
+}
+.home-banner{
+    display:flex;
+    justify-content:space-around;
+    align-items:center;
+    padding:100px 0;
+}
+.home-rec{
+    width: 200px;
+    height:200px;
+    border-radius:10px;
+    background: $red;
+    color:inherit;
+    text-align: center;
+    display:table;
+    
+    transform: rotate(45deg);
+    h2{
+        transform:rotate(-45deg);
+        vertical-align: middle;
+        display:table-cell;
+    }
+}

@@ -1,0 +1,15 @@
+.products{
+    display:flex;
+    flex-wrap: wrap;
+    flex-direction:row;
+    .product{
+        width: 20%;
+        margin-left: 4%;
+        border: 1px solid black;
+        cursor: pointer; 
+        h3{
+            color:red;
+        } 
+    }
+}
+
