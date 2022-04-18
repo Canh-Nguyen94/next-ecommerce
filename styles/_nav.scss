@@ -25,13 +25,19 @@
 }
 .nav-user{
     width: 30%;
+    display: flex;
     color: inherit;
-    ul{
-        list-style: none;
-        display:flex;
-        li{
-            display: inline-block;
+    div{           
             margin-left:20px;
         }
     }
+.cart{
+    position: relative;
+    
+}
+.cart-badge{   
+    position: absolute;
+    top: -15px;
+    right: -10px;
+    color: $red;
 }

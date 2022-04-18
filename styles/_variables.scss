@@ -1,15 +1,34 @@
 $black: black;
 $white: white;
 $red: red;
+$blue: rgba(17, 137, 202, 0.852);
 
 .button-red{
     width: 10rem;
     height: 3rem;
     border-radius: 1.5rem;
+    display: block;
     outline: none;
     border: 2px solid $red;
 
     background:$red;
+    color:inherit;
+    cursor: pointer;
+    &:hover{
+        background:$white;
+        color: $black;
+        transition: all 0.5s ease;
+    }
+}
+.button-blue{
+    width: 7rem;
+    height: 2rem;
+    border-radius: 1rem;
+    display: block;
+    outline: none;
+    border: 1px solid $blue;
+
+    background:$blue;
     color:inherit;
     cursor: pointer;
     &:hover{

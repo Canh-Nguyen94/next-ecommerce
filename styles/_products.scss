@@ -1,15 +1,28 @@
 .products{
+    width: 100%;
     display:flex;
     flex-wrap: wrap;
-    flex-direction:row;
-    .product{
-        width: 20%;
-        margin-left: 4%;
-        border: 1px solid black;
-        cursor: pointer; 
-        h3{
-            color:red;
-        } 
+    flex-direction:row;   
+}
+.product{
+    width: 20%;
+    margin-left: 4%;
+    border-radius: 10px;
+    position: relative;
+    cursor: pointer; 
+    h3{
+        color:red;
+    } 
+    &:hover{
+        .button-container{
+            display:flex;
+            justify-content: space-around;
+        }
     }
 }
-
+.button-container{
+    width: 100%;
+    display:none;
+    position: absolute;
+    top:70%;
+}

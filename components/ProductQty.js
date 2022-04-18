@@ -1,13 +1,11 @@
 import React, { useContext} from "react";
-import {useProduct} from "../lib/ProductContext"
-function ProductQty() {
-    
-const {state, dispatch} = useProduct()
+function ProductQty({quantity,setQuantity}) {
+
   return (
     <div>
-      <span onClick={() => dispatch({ type: "decrease", value: 1 })}>-</span>
-      <input value={state.productQty} onChange={(e)=>dispatch({ type: "fixNumber", value: e.target.value})}></input>
-      <span onClick={() => dispatch({ type: "increase", value: 1 })}>+</span>
+      <span onClick={() => setQuantity(quantity=>quantity-1)}>-</span>
+      <input value={quantity} onChange={(e)=>setQuantity(e.target.value)}></input>
+      <span onClick={() => setQuantity(quantity=>quantity+1)}>+</span>
     </div>
   );
 }

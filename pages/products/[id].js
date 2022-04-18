@@ -1,14 +1,25 @@
 import axios from "axios";
 import Image from "next/image";
-import React from "react";
+import React, { useCallback, useState } from "react";
 import { FetchProduct } from "../../lib/fetch-product";
 import ProductQty from "../../components/ProductQty";
 import MiniCart from "../../components/MiniCart";
 import { useProduct } from "../../lib/ProductContext";
 
-
 function ProductDetail({ product }) {
   const { state, dispatch } = useProduct();
+  const [quantity, setQuantity] = useState(1);
+
+  const handleClick = () => {
+    dispatch({
+      type: "addToCart",
+      value: {
+        id: product.id,
+        title: product.title,
+        quantity: quantity,
+      },
+    });
+  };
   return (
     <div>
       <div>
@@ -18,23 +29,10 @@ function ProductDetail({ product }) {
         <div>
           <h2>{product.title}</h2>
           <h4>{product.price}</h4>
-        </div>       
-          <ProductQty />
-          <MiniCart />
-        <button
-          onClick={() =>
-            dispatch({
-              type: "addToCart",
-              value: {
-                id: product.id,
-                title: product.title,
-                quantity: state.productQty,
-              },
-            })
-          }
-        >
-          Add to Cart
-        </button>
+        </div>
+        <ProductQty quantity={quantity} setQuantity={setQuantity} />
+        <MiniCart />
+        <button onClick={handleClick}>Add to Cart</button>
         <button>Buy now</button>
       </div>
     </div>
