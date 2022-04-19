@@ -5,10 +5,10 @@ import { FaSearch } from "react-icons/fa";
 
 function Nav() {
   const { state, dispatch } = useProduct();
-
+console.log("State",state)
   let productsQuantity = 0;
   if (state) {
-    const productsQuantity = state.cartProducts.reduce(
+    productsQuantity = state.cartProducts.reduce(
       (sum, product) => sum + product.quantity,
       0
     );
@@ -16,7 +16,9 @@ function Nav() {
 
   return (
     <div className="nav">
-      <div className="nav-logo">Logo</div>
+      <Link href="/" passHref>
+        <div className="nav-logo">Logo</div>
+      </Link>
       <div className="nav-search">
         <input type="text" />
         <button>
@@ -24,7 +26,10 @@ function Nav() {
         </button>
       </div>
       <div className="nav-user">
-        <div>User Name</div>
+        <Link href="/user/login">
+          <div>Login/Register</div>
+        </Link>
+
         <Link href="/cart" passHref>
           <div className="cart">
             Cart

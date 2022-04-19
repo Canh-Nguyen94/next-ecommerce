@@ -49,7 +49,9 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-  const res = await axios.get(`https://fakestoreapi.com/products/${params.id}`);
+  const res = await axios.get(
+    `https://625e7950873d6798e2a80ac8.mockapi.io/api/v1/products/${params.id}`
+  );
   const product = res.data;
 
   return { props: { product: product } };
