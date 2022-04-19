@@ -7,7 +7,7 @@ import {
   validUser,
 } from "../../lib/regex";
 import { FaCheck } from "react-icons/fa";
-import Nav from "../../components/Nav"
+import Nav from "../../components/Nav";
 
 function Register() {
   const [userName, setUserName] = useState("");
@@ -83,25 +83,7 @@ function Register() {
             required
           />
         </div>
-        <div className="input-container">
-          <div>
-            <label for="phone">Phone number</label>
-            {phoneErr ? (
-              <span>Phone number is invalid</span>
-            ) : (
-              <FaCheck className="green-icon" />
-            )}
-          </div>
 
-          <input
-            type="number"
-            id="phone"
-            value={phone}
-            onChange={(e) => setPhone(e.target.value)}
-            placeHolder="Eg: +84|84|0 979123456"
-            required
-          />
-        </div>
         <div className="input-container">
           <div>
             <label for="password">Password</label>
@@ -142,7 +124,7 @@ function Register() {
         </div>
         <div className="form-button">
           <button
-            className="button-black"
+            className="button-blue"
             onClick={(e) => {
               validate();
               confirmPassWord();
@@ -164,11 +146,11 @@ function Register() {
 
 export default Register;
 
-Register.getLayout = function PageLayout(page){
-    return(
-        <>
-        <Nav/>
-        {page}
-        </>
-    )
-}
+Register.getLayout = function PageLayout(page) {
+  return (
+    <>
+      <Nav />
+      {page}
+    </>
+  );
+};
