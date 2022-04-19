@@ -1,15 +1,19 @@
-import React,{useContext} from "react";
+import React, { useContext } from "react";
 import Link from "next/link";
-import { ProductContext } from "../lib/ProductContext";
+import { useProduct } from "../lib/ProductContext";
 import { FaSearch } from "react-icons/fa";
 
 function Nav() {
-  const { state, dispatch } = useContext(ProductContext);
-  const productsQuantity = state.cartProducts.reduce(
-    (sum, product) => sum + product.quantity,
-    0
-  );
-  console.log("productsQty", productsQuantity);
+  const { state, dispatch } = useProduct();
+
+  let productsQuantity = 0;
+  if (state) {
+    const productsQuantity = state.cartProducts.reduce(
+      (sum, product) => sum + product.quantity,
+      0
+    );
+  }
+
   return (
     <div className="nav">
       <div className="nav-logo">Logo</div>
