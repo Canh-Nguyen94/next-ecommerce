@@ -3,7 +3,7 @@ import {fetchCartItems} from "../lib/fetch-cartItems"
 function NavCart() {
     const [items,setItems] =  useState([]);
 
-    console.log("items",items)
+
     useEffect(()=>{
         const fetchItems = async()=>{
             const data = await fetchCartItems();
@@ -17,7 +17,7 @@ function NavCart() {
         <h2>Minicart product</h2>
      {items.map(item=>{
          return (
-             <div>
+             <div key={item.id}>
                  {item.id} + {item.title}
              </div>
          )
