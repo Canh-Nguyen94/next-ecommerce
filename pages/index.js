@@ -27,7 +27,6 @@ export default Home
 Home.getLayout = function PageLayout(page){
     return(
         <>
-        <Nav/>
         {page}
         </>
     )
