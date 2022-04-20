@@ -3,69 +3,69 @@ $white: white;
 $red: red;
 $blue: rgba(17, 137, 202, 1);
 $green: rgb(13, 139, 44);
+$gray: gray;
 
-@mixin button($background1,$background2,$color1,$color2){
-    width: 7rem;
-    height: 2rem;
-    border-radius: 1rem;
-    font-size: 1.2rem;
-    display: block;
-    outline: none;
-    border: 1px solid $background1;
-    color: $color1;
+@mixin button($background1, $background2, $color1, $color2) {
+  width: 7rem;
+  height: 2rem;
+  border-radius: 1rem;
+  font-size: 1.2rem;
+  display: block;
+  outline: none;
+  border: 1px solid $background1;
+  color: $color1;
 
-    background:$background1;
-    color:inherit;
-    cursor: pointer;
-    &:hover{
-        background:$background2;
-        color: $color2;
-        transition: all 0.5s ease;
-    }
+  background: $background1;
+  color: inherit;
+  cursor: pointer;
+  &:hover {
+    background: $background2;
+    color: $color2;
+    transition: all 0.5s ease;
+  }
 }
-.button-red{
-    width: 10rem;
-    height: 3rem;
-    border-radius: 1.5rem;
-    display: block;
-    outline: none;
-    border: 2px solid $red;
+.button-red {
+  width: 10rem;
+  height: 3rem;
+  border-radius: 1.5rem;
+  display: block;
+  outline: none;
+  border: 2px solid $red;
 
-    background:$red;
-    color:inherit;
-    cursor: pointer;
-    &:hover{
-        background:$white;
-        color: $black;
-        transition: all 0.5s ease;
-    }
+  background: $red;
+  color: inherit;
+  cursor: pointer;
+  &:hover {
+    background: $white;
+    color: $black;
+    transition: all 0.5s ease;
+  }
 }
-.button-blue{
-    width: 7rem;
-    height: 2rem;
-    border-radius: 1rem;
-    font-size: 1.2rem;
-    display: block;
-    outline: none;
-    border: 1px solid $blue;
+.button-blue {
+  width: 7rem;
+  height: 2rem;
+  border-radius: 1rem;
+  font-size: 1.2rem;
+  display: block;
+  outline: none;
+  border: 1px solid $blue;
 
-    background:$blue;
-    color:inherit;
-    cursor: pointer;
-    &:hover{
-        background:$white;
-        color: $black;
-        transition: all 0.5s ease;
-    }
-}
-
-.green-icon{
-    color: $green;
-    vertical-align: middle;
-    margin-left: 10px;
+  background: $blue;
+  color: inherit;
+  cursor: pointer;
+  &:hover {
+    background: $white;
+    color: $black;
+    transition: all 0.5s ease;
+  }
 }
 
-.button-black{
-    @include button($black,$white,$white,$blue)
-    
+.green-icon {
+  color: $green;
+  vertical-align: middle;
+  margin-left: 10px;
+}
+
+.button-black {
+  @include button($black, $white, $white, $blue);
 }

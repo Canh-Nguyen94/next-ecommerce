@@ -1,53 +1,49 @@
 import React, { useState } from "react";
 import Link from "next/link";
-import {
-  validEmail,
-  validPassword,
-  validPhone,
-  validUser,
-} from "../../lib/regex";
+import { validEmail, validPassword, validUser } from "../../lib/regex";
 import { FaCheck } from "react-icons/fa";
-import Nav from "../../components/Nav"
+import { useAuth } from "../../lib/AuthContext";
+import { useRouter } from "next/router";
 
 function Register() {
   const [userName, setUserName] = useState("");
   const [userEmail, setUserEmail] = useState("");
-  const [phone, setPhone] = useState("");
-  const [passWord, setPassWord] = useState("");
+  const [password, setPassword] = useState("");
   const [passConfirm, setPassConfirm] = useState("");
-  const [nameErr, setNameErr] = useState(false);
-  const [emailErr, setEmailErr] = useState(false);
-  const [phoneErr, setPhoneErr] = useState(false);
-  const [passErr, setPassErr] = useState(false);
-  const [confirmErr, setConfirmErr] = useState(false);
+  const [nameErr, setNameErr] = useState(true);
+  const [emailErr, setEmailErr] = useState(true);
+  const [passErr, setPassErr] = useState(true);
+  const [confirmErr, setConfirmErr] = useState(true);
 
+  const router = useRouter();
+  const { register } = useAuth();
   const validate = () => {
-    if (!validEmail.test(userEmail)) {
-      setEmailErr(true);
-    }
-    if (!validPassword.test(passWord)) {
-      setPassErr(true);
-    }
-    if (!validUser.test(userName)) {
-      setNameErr(true);
-    }
-    if (!validPhone.test(phone)) {
-      setPhoneErr(true);
-    }
+    validEmail.test(userEmail) ? setEmailErr(false) : setEmailErr(true);
+
+    validPassword.test(password) ? setPassErr(false) : setPassErr(true);
+
+    validUser.test(userName) ? setNameErr(false) : setNameErr(true);
   };
 
-  const confirmPassWord = () => {
-    if (passWord !== passConfirm) {
-      setConfirmErr(true);
+  const confirmPassword = () => {
+    password === passConfirm ? setConfirmErr(false) : setConfirmErr(true);
+  };
+
+  const handleSubmit = async () => {
+    if (nameErr || emailErr || passErr || confirmErr) {
+      return;
     }
+
+    await register(userEmail, password);
+    router.push("/");
   };
   return (
     <div className="form-container">
-      <form action="">
+      <form autoComplete="off">
         <h2>Register</h2>
         <div className="input-container">
           <div>
-            <label for="name">User name</label>
+            <label htmlhtmlFor="name">User name</label>
             {nameErr ? (
               <span>User name is invalid</span>
             ) : (
@@ -59,14 +55,17 @@ function Register() {
             type="text"
             id="name"
             value={userName}
-            onChange={(e) => setUserName(e.target.value)}
-            placeHolder="Eg: a|A1234567"
+            onChange={(e) => {
+              setUserName(e.target.value);
+              validate();
+            }}
+            placeholder="Eg: a|A1234567"
             required
           />
         </div>
         <div className="input-container">
           <div>
-            <label for="email">User email</label>
+            <label htmlFor="email">User email</label>
             {emailErr ? (
               <span>User email is invalid</span>
             ) : (
@@ -78,33 +77,18 @@ function Register() {
             type="email"
             id="email"
             value={userEmail}
-            onChange={(e) => setUserEmail(e.target.value)}
-            placeHolder="Eg: abcd@gmail.com"
+            onChange={(e) => {
+              setUserEmail(e.target.value);
+            }}
+            onKeyUp={validate}
+            placeholder="Eg: abcd@gmail.com"
             required
           />
         </div>
-        <div className="input-container">
-          <div>
-            <label for="phone">Phone number</label>
-            {phoneErr ? (
-              <span>Phone number is invalid</span>
-            ) : (
-              <FaCheck className="green-icon" />
-            )}
-          </div>
 
-          <input
-            type="number"
-            id="phone"
-            value={phone}
-            onChange={(e) => setPhone(e.target.value)}
-            placeHolder="Eg: +84|84|0 979123456"
-            required
-          />
-        </div>
         <div className="input-container">
           <div>
-            <label for="password">Password</label>
+            <label htmlFor="password">Password</label>
             {passErr ? (
               <span>Password is invalid</span>
             ) : (
@@ -115,14 +99,17 @@ function Register() {
           <input
             type="password"
             id="password"
-            value={passWord}
-            onChange={(e) => setPassWord(e.target.value)}
+            value={password}
+            onChange={(e) => {
+              setPassword(e.target.value);
+            }}
+            onKeyUp={validate}
             required
           />
         </div>
         <div className="input-container">
           <div>
-            <label for="confirm">Confirm password</label>
+            <label htmlFor="confirm">Confirm password</label>
             {confirmErr ? (
               <span>Password must be the same</span>
             ) : (
@@ -137,20 +124,22 @@ function Register() {
             onChange={(e) => {
               setPassConfirm(e.target.value);
             }}
+            onKeyUp={confirmPassword}
             required
           />
         </div>
         <div className="form-button">
           <button
-            className="button-black"
+            className="button-blue"
+            type="submit"
             onClick={(e) => {
-              validate();
-              confirmPassWord();
               e.preventDefault();
+              handleSubmit();
             }}
           >
             Register
           </button>
+
           <Link href="/user/login" passHref>
             <h4>
               Already have an acount?<span>Login</span>
@@ -164,11 +153,6 @@ function Register() {
 
 export default Register;
 
-Register.getLayout = function PageLayout(page){
-    return(
-        <>
-        <Nav/>
-        {page}
-        </>
-    )
-}
+Register.getLayout = function PageLayout(page) {
+  return <>{page}</>;
+};

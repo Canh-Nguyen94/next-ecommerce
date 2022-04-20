@@ -1,11 +1,13 @@
-import React, { useContext } from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import { useProduct } from "../lib/ProductContext";
+import { useAuth } from "../lib/AuthContext";
 import { FaSearch } from "react-icons/fa";
 
 function Nav() {
   const { state, dispatch } = useProduct();
-console.log("State",state)
+  const { user, logOut } = useAuth();
+
   let productsQuantity = 0;
   if (state) {
     productsQuantity = state.cartProducts.reduce(
@@ -13,6 +15,11 @@ console.log("State",state)
       0
     );
   }
+  const handleLogOut = () => {
+    logOut();
+    dispatch("resetCart");
+    productsQuantity = 0;
+  };
 
   return (
     <div className="nav">
@@ -26,9 +33,13 @@ console.log("State",state)
         </button>
       </div>
       <div className="nav-user">
-        <Link href="/user/login">
-          <div>Login/Register</div>
-        </Link>
+        {user ? (
+          user.email
+        ) : (
+          <Link href="/user/login" passHref>
+            <div>Login/Register</div>
+          </Link>
+        )}
 
         <Link href="/cart" passHref>
           <div className="cart">
@@ -36,8 +47,7 @@ console.log("State",state)
             <span className="cart-badge">{productsQuantity}</span>
           </div>
         </Link>
-
-        <div>Sign out</div>
+        {user ? <div onClick={handleLogOut}>Sign out</div> : null}
       </div>
     </div>
   );
