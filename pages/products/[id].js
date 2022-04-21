@@ -1,16 +1,27 @@
 import axios from "axios";
 import Image from "next/image";
-import React, { useCallback, useState } from "react";
+import React, { useRef, useState } from "react";
+import { useRouter } from "next/router";
 import { FetchProduct } from "../../lib/fetch-product";
 import ProductQty from "../../components/ProductQty";
 import MiniCart from "../../components/MiniCart";
 import { useProduct } from "../../lib/ProductContext";
+import { useAuth } from "../../lib/AuthContext";
+import Notification from "../../components/Notification";
 
 function ProductDetail({ product }) {
-  const { state, dispatch } = useProduct();
   const [quantity, setQuantity] = useState(1);
-
+  const [success,setSuccess] = useState(false);
+  const { state, dispatch } = useProduct();
+  const { user } = useAuth();
+  const router = useRouter();
+  
   const handleClick = () => {
+    if (!user) {
+      alert("you need to login first");
+      router.push("/user/login");
+      return;
+    }
     dispatch({
       type: "addToCart",
       value: {
@@ -19,9 +30,13 @@ function ProductDetail({ product }) {
         quantity: quantity,
       },
     });
+    setSuccess(true);
+    
+    setTimeout(()=>{setSuccess(false)},2000)
   };
   return (
-    <div>
+    <div className="detail">
+      
       <div>
         <Image src={product.image} width={400} height={400} alt="image"></Image>
       </div>

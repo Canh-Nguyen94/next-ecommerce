@@ -3,11 +3,12 @@ import Link from "next/link";
 import { useProduct } from "../lib/ProductContext";
 import { useAuth } from "../lib/AuthContext";
 import { FaSearch } from "react-icons/fa";
+import { useRouter } from "next/router";
 
 function Nav() {
   const { state, dispatch } = useProduct();
   const { user, logOut } = useAuth();
-
+  const router = useRouter();
   let productsQuantity = 0;
   if (state) {
     productsQuantity = state.cartProducts.reduce(
@@ -15,10 +16,11 @@ function Nav() {
       0
     );
   }
-  const handleLogOut = () => {
-    logOut();
-    dispatch("resetCart");
+  const handleLogOut = async () => {
+    await logOut();
+    dispatch({ type: "resetCart", value: {} });
     productsQuantity = 0;
+    router.push("/user/login");
   };
 
   return (
@@ -34,7 +36,7 @@ function Nav() {
       </div>
       <div className="nav-user">
         {user ? (
-          user.email
+          <div className="nav-email">{user.name||user.email}</div>        
         ) : (
           <Link href="/user/login" passHref>
             <div>Login/Register</div>

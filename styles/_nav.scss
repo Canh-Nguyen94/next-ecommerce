@@ -42,3 +42,9 @@
     right: -10px;
     color: $red;
 }
+.nav-email{
+    max-width: 120px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
