@@ -4,7 +4,10 @@ import { FetchProduct } from "../../lib/fetch-product";
 function Products({ products }) {
   return (
     <>
-      <h1>All products</h1>
+      <div>
+        <h1>All products</h1>
+      </div>
+
       <div className="products">
         {products.map((product) => {
           return <ProductCard product={product} key={product.id} />;
