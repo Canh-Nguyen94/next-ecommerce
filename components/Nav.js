@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Link from "next/link";
-import { useProduct } from "../lib/ProductContext";
-import { useAuth } from "../lib/AuthContext";
+import { useProduct } from "../context/ProductContext";
+import { useAuth } from "../context/AuthContext";
 import { FaSearch } from "react-icons/fa";
 import { useRouter } from "next/router";
 

@@ -1,6 +1,8 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { fadeInDown, staggerVariants } from "../motion/pageTransition";
+import { motion } from "framer-motion";
 
 function ProductCard({ product }) {
   const handleClick = (e) => {
@@ -9,7 +11,11 @@ function ProductCard({ product }) {
   return (
     <>
       <Link href={`/products/${product.id}`} passHref key={product.id}>
-        <div className="product" key={product.id}>
+        <motion.div
+          className="product"
+          key={product.id}
+          variants={fadeInDown}
+        >
           <Image
             src={product.image}
             width={500}
@@ -25,7 +31,7 @@ function ProductCard({ product }) {
               Add to cart
             </button>
           </div>
-        </div>
+        </motion.div>
       </Link>
     </>
   );

@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { useProduct } from "../lib/ProductContext";
+import { useProduct } from "../context/ProductContext";
 function MiniCart() {
   const { state, dispatch } = useProduct();
   return (

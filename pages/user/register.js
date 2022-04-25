@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { validEmail, validPassword, validUser } from "../../lib/regex";
 import { FaCheck } from "react-icons/fa";
-import { useAuth } from "../../lib/AuthContext";
+import { useAuth } from "../../context/AuthContext";
 import { useRouter } from "next/router";
 
 function Register() {
