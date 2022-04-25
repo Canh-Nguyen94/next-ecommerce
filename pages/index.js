@@ -1,6 +1,9 @@
 import { useEffect, useCallback, useState } from "react";
 import Link from "next/link";
+import Head from "next/head";
 import { FaArrowRight } from "react-icons/fa";
+
+Home.title = "Moon shop"
 function Home() {
   const [scrollY, setScrollY] = useState();
   const handleScroll = useCallback(() => {
@@ -15,6 +18,10 @@ function Home() {
 
   return (
     <div className="home">
+      <Head>
+        <title>Moon dust</title>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      </Head>
       <div className="parallax">
         <img
           src="./stars.png"
@@ -26,7 +33,9 @@ function Home() {
           id="moon"
           style={{ transform: `translateX(${scrollY * 1}px)` }}
         />
-        <h1 style={{ transform: `translateX(-${scrollY * 2}px)` }}>WELCOME TO OUR SHOP</h1>
+        <h1 style={{ transform: `translateX(-${scrollY * 2}px)` }}>
+          WELCOME TO OUR SHOP
+        </h1>
         <img
           src="./mountains_behind.png"
           id="mountains_behind"
@@ -49,5 +58,3 @@ function Home() {
   );
 }
 export default Home;
-
-

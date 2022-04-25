@@ -1,68 +1,37 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
-import { validEmail, validPassword } from "../../lib/regex";
-import { FaCheck } from "react-icons/fa";
 import { useAuth } from "../../lib/AuthContext";
 
 function Login() {
   const [userEmail, setUserEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [emailErr, setEmailErr] = useState(true);
-  const [passErr, setPassErr] = useState(true);
 
   const router = useRouter();
   const { login } = useAuth();
 
-  const validate = () => {
-    validEmail.test(userEmail) ? setEmailErr(false) : setEmailErr(true);
-
-    validPassword.test(password) ? setPassErr(false) : setPassErr(true);
-  };
   const handleSubmit = async () => {
-    if (emailErr || passErr) {
-      return;
-    }
     await login(userEmail, password);
     router.push("/");
   };
   return (
-    <div className="form-container">
+    <div className="login-container">
       <form action="">
         <h2>Login</h2>
-        <div className="input-container">
-          <div>
-            <label htmlFor="email">User email</label>
-            {emailErr ? (
-              <span>User email is invalid</span>
-            ) : (
-              <FaCheck className="green-icon" />
-            )}
-          </div>
-
+        <div className="form-section">
           <input
-            type="email"
+            type="text"
             id="email"
             value={userEmail}
             onChange={(e) => {
               setUserEmail(e.target.value);
             }}
-            onKeyUp={validate}
-            placeholder="Eg: abcd@gmail.com"
             required
           />
+          <label htmlFor="email">User email</label>
         </div>
-        <div className="input-container">
-          <div>
-            <label htmlFor="password">Password</label>
-            {passErr ? (
-              <span>Password is invalid</span>
-            ) : (
-              <FaCheck className="green-icon" />
-            )}
-          </div>
-
+        <div className="form-section">
           <input
             type="password"
             id="password"
@@ -70,9 +39,9 @@ function Login() {
             onChange={(e) => {
               setPassword(e.target.value);
             }}
-            onKeyUp={validate}
             required
           />
+          <label htmlFor="password">Password</label>
         </div>
         <div className="form-button">
           <button
