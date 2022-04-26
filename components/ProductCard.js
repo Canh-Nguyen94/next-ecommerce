@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { fadeInDown, staggerVariants } from "../motion/pageTransition";
+import { fadeInUp} from "../motion/pageTransition";
 import { motion } from "framer-motion";
 
 function ProductCard({ product }) {
@@ -14,7 +14,7 @@ function ProductCard({ product }) {
         <motion.div
           className="product"
           key={product.id}
-          variants={fadeInDown}
+          variants={fadeInUp}
         >
           <Image
             src={product.image}

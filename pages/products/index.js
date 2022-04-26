@@ -1,14 +1,14 @@
 import ProductCard from "../../components/ProductCard";
 import { FetchProduct } from "../../lib/fetch-product";
 import { motion } from "framer-motion";
-import { fadeInDown, staggerVariants } from "../../motion/pageTransition";
+import { staggerUp } from "../../motion/pageTransition";
 
 function Products({ products }) {
   return (
     <>
       <motion.div
         className="products"
-        variants={staggerVariants}
+        variants={staggerUp}
         initial="hidden"
         animate="visible"
       >

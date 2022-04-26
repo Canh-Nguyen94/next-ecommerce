@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
-
 import { useAuth } from "../../context/AuthContext";
+import {fadeInUp} from "../../motion/pageTransition";
+import {motion} from "framer-motion"
 
 function Login() {
   const [userEmail, setUserEmail] = useState("");
@@ -16,7 +17,7 @@ function Login() {
     router.push("/");
   };
   return (
-    <div className="login-container">
+    <motion.div className="login-container" variants={fadeInUp} initial="hidden" animate="visible">
       <form action="">
         <h2>Login</h2>
         <div className="form-section">
@@ -61,7 +62,7 @@ function Login() {
           </Link>
         </div>
       </form>
-    </div>
+    </motion.div>
   );
 }
 
