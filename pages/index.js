@@ -2,58 +2,70 @@ import { useEffect, useCallback, useState } from "react";
 import Link from "next/link";
 import Head from "next/head";
 import { FaArrowRight } from "react-icons/fa";
+import { useScroll } from "../context/ScrollContext";
+import { motion } from "framer-motion";
+import { fadeInDown, staggerDown } from "../motion/pageTransition";
 
-Home.title = "Moon shop"
 function Home() {
-  const [scrollY, setScrollY] = useState();
-  const handleScroll = useCallback(() => {
-    setScrollY(window.scrollY);
-  }, []);
-  useEffect(() => {
-    document.addEventListener("scroll", handleScroll);
-    return () => {
-      document.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
-
+  const { scrollY } = useScroll();
   return (
     <div className="home">
       <Head>
         <title>Moon dust</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
-      <div className="parallax">
-        <img
+      <motion.div
+        variants={staggerDown}
+        initial="hidden"
+        animate="visible"
+        exit={{opacity:0}}
+        className="parallax"
+      >
+        <motion.img
+          variants={fadeInDown}
           src="./stars.png"
           id="stars"
           style={{ left: `-${scrollY * 0.5}px` }}
         />
-        <img
+        <motion.img
+          variants={fadeInDown}
           src="./moon.png"
           id="moon"
-          style={{ transform: `translateX(${scrollY * 1}px)` }}
+          style={{ left: `${scrollY * 1}px` }}
         />
-        <h1 style={{ transform: `translateX(-${scrollY * 2}px)` }}>
+        <motion.h1
+          initial={{ opacity: 0 }}
+          animate={{
+            opacity: [0, 1, 0],
+            transition: { delay: 2, duration: 2 },
+          }}
+        >
           WELCOME TO OUR SHOP
-        </h1>
-        <img
+        </motion.h1>
+        <motion.img
+          variants={fadeInDown}
           src="./mountains_behind.png"
           id="mountains_behind"
           style={{ transform: `translateY(-${scrollY * 0.25}px)` }}
         />
 
-        <img src="./mountains_front.png" id="mountains_front" />
-      </div>
-      <div>
-        <Link href="./products" className="home-button" passHref>
-          <button className="button-red">
-            Go to shop <FaArrowRight className="icon-red" />{" "}
-          </button>
-        </Link>
-        <button className="button-red" id="thisButton">
-          Show some text
-        </button>
-      </div>
+        <motion.img
+          variants={fadeInDown}
+          src="./mountains_front.png"
+          id="mountains_front"
+        />
+        <motion.div
+          className="home-button"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1, transition: { delay: 4, duration: 1 } }}
+        >
+          <Link href="./products" passHref>
+            <button className="button-red">
+              Go to shop <FaArrowRight className="icon-red" />{" "}
+            </button>
+          </Link>
+        </motion.div>
+      </motion.div>
     </div>
   );
 }

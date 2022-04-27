@@ -1,18 +1,21 @@
 import ProductCard from "../../components/ProductCard";
 import { FetchProduct } from "../../lib/fetch-product";
+import { motion } from "framer-motion";
+import { staggerUp } from "../../motion/pageTransition";
 
 function Products({ products }) {
   return (
     <>
-      <div>
-        <h1>All products</h1>
-      </div>
-
-      <div className="products">
+      <motion.div
+        className="products"
+        variants={staggerUp}
+        initial="hidden"
+        animate="visible"
+      >
         {products.map((product) => {
           return <ProductCard product={product} key={product.id} />;
         })}
-      </div>
+      </motion.div>
     </>
   );
 }

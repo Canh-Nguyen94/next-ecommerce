@@ -1,11 +1,13 @@
 import "../styles/globals.scss";
-import ProductProvider from "../lib/ProductContext";
+import ProductProvider from "../context/ProductContext";
 import Layout from "../components/Layout";
-import AuthContextProvider from "../lib/AuthContext";
+import AuthContextProvider from "../context/AuthContext";
+import ScrollContextProvider from "../context/ScrollContext";
 import Nav from "../components/Nav";
 import { useState, useEffect } from "react";
 import NextNProgress from "nextjs-progressbar";
 import { useRouter } from "next/router";
+import { AnimatePresence } from "framer-motion";
 
 function Loading() {
   const [loading, setLoading] = useState(false);
@@ -42,15 +44,19 @@ function MyApp({ Component, pageProps }) {
     return Component.getLayout(
       <ProductProvider>
         <AuthContextProvider>
-          <Nav />
-          <NextNProgress
-            startPosition={0.5}
-            stopDelayMs={300}
-            height={5}
-            showOnShallow={true}
-          />
+          <ScrollContextProvider>
+            <AnimatePresence exitBeforeEnter>
+              <Nav />
+              <NextNProgress
+                startPosition={0.5}
+                stopDelayMs={300}
+                height={5}
+                showOnShallow={true}
+              />
 
-          <Component />
+              <Component />
+            </AnimatePresence>
+          </ScrollContextProvider>
         </AuthContextProvider>
       </ProductProvider>
     );
@@ -58,16 +64,20 @@ function MyApp({ Component, pageProps }) {
   return (
     <ProductProvider>
       <AuthContextProvider>
-        <Layout>
-          <NextNProgress
-            startPosition={0.5}
-            stopDelayMs={300}
-            height={5}
-            showOnShallow={false}
-          />
+        <ScrollContextProvider>
+          <AnimatePresence exitBeforeEnter>
+            <Layout>
+              <NextNProgress
+                startPosition={0.5}
+                stopDelayMs={300}
+                height={5}
+                showOnShallow={false}
+              />
 
-          <Component {...pageProps} />
-        </Layout>
+              <Component {...pageProps} />
+            </Layout>
+          </AnimatePresence>
+        </ScrollContextProvider>
       </AuthContextProvider>
     </ProductProvider>
   );

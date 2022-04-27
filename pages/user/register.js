@@ -2,8 +2,10 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { validEmail, validPassword, validUser } from "../../lib/regex";
 import { FaCheck } from "react-icons/fa";
-import { useAuth } from "../../lib/AuthContext";
+import { useAuth } from "../../context/AuthContext";
 import { useRouter } from "next/router";
+import {fadeInUp} from "../../motion/pageTransition";
+import {motion} from "framer-motion"
 
 function Register() {
   const [userName, setUserName] = useState("");
@@ -38,7 +40,7 @@ function Register() {
     router.push("/");
   };
   return (
-    <div className="form-container">
+    <motion.div className="form-container" variants={fadeInUp} initial="hidden" animate="visible">
       <form autoComplete="off">
         <h2>Register</h2>
         <div className="input-container">
@@ -147,7 +149,7 @@ function Register() {
           </Link>
         </div>
       </form>
-    </div>
+    </motion.div>
   );
 }
 

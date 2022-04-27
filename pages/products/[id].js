@@ -5,8 +5,8 @@ import { useRouter } from "next/router";
 import { FetchProduct } from "../../lib/fetch-product";
 import ProductQty from "../../components/ProductQty";
 import MiniCart from "../../components/MiniCart";
-import { useProduct } from "../../lib/ProductContext";
-import { useAuth } from "../../lib/AuthContext";
+import { useProduct } from "../../context/ProductContext";
+import { useAuth } from "../../context/AuthContext";
 import Notification from "../../components/Notification";
 
 function ProductDetail({ product }) {
