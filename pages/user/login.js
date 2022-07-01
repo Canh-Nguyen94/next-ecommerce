@@ -19,7 +19,7 @@ function Login() {
   return (
     <motion.div className="login-container" variants={fadeInUp} initial="hidden" animate="visible">
       <form action="">
-        <h2>Login</h2>
+        <h2>Login OK</h2>
         <div className="form-section">
           <input
             type="text"
